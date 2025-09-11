@@ -1,13 +1,12 @@
-const isLoggedIn = (prop) => {
-    const value = (prop === false) ? <>false</> : <>true</>;
-    return(
-    <>{value}</>
-    )
-}
+import {useLocation} from 'react-router-dom'
+
 const User = () => {
-    let loggedIn = false
+    const location = useLocation()
+    const credentials = location.state
     return (
-        <div>{isLoggedIn(loggedIn)}</div>
+        <div>
+            Hello {credentials.userName}
+        </div>
     )
 }
 
