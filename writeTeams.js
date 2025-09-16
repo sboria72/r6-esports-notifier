@@ -61,22 +61,25 @@ const globalLeagueTeams = [
 const run = async() => {
     let page = 1
     let data = ["temp"]
+    let totalTeams = []
     while(data.length !== 0) {
             const res = await fetch(`https://api.pandascore.co/r6siege/teams?page=${page}&token=8NlsTpPV9cqO6vMalaVNIQ6itLzJ1Yo9PlJ8hLu5roHrg9xeiC4`)
             data = await res.json()
-            const filteredTeams = data.filter(team => globalLeagueTeams.includes(team.name))
-            for(const filteredTeam of filteredTeams) {
-                console.log(filteredTeam.name)
+            let filteredTeams = data.filter(team => globalLeagueTeams.includes(team.name))
+            if(filteredTeams.length !== 0) {
+                console.log(filteredTeams.length)
+                totalTeams = totalTeams.concat(filteredTeams);
             }
-            fs.writeFileSync('teams.json', JSON.stringify(filteredTeams), err => {
-                if (err) {
-                    console.error('Error writing file', err);
-                } else {
-                    console.log('Successfully wrote file');
-                }
-            });
             page++
+    }
+    console.log(totalTeams[13])
+    fs.writeFile('teams.json', JSON.stringify(totalTeams), err => {
+        if (err) {
+            console.error('Error writing file', err);
+        } else {
+            console.log('Successfully wrote file');
         }
-        console.log(page)
+    });
+    console.log(page)
 };
 run();

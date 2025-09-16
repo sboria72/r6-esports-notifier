@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import User from './components/User'
 import IsLoggedIn from './components/IsLoggedIn'
 import Teams from './pages/Teams'
+import { NavbarText } from 'react-bootstrap';
 
 const App = () => {
   const [user,setUser] = useState(undefined)
@@ -18,6 +19,7 @@ const App = () => {
         <Container>
           <Navbar.Brand as = {Link} to ="/">R6 Notifier</Navbar.Brand>
           <Navbar.Toggle />
+          <NavbarText as = {Link} to = "/teams">Teams</NavbarText>
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               <IsLoggedIn user = {user}/>
